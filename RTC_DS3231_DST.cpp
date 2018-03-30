@@ -6,7 +6,7 @@ bool RTC_DS3231_DST::is_dst_period(DateTime date) {
   DateTime dst_begin = find_last_sunday_of(date.year(), 3, 2, 0);
   DateTime dst_end = find_last_sunday_of(date.year(), 10, 3, 0);
 
-  return dst_end > n && n > dst_begin;
+  return dst_end > date && date > dst_begin;
 }
 
 DateTime RTC_DS3231_DST::find_last_sunday_of(int y, int m, int h, int minute) {
