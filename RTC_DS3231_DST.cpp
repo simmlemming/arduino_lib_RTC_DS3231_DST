@@ -29,7 +29,7 @@ DateTime RTC_DS3231_DST::now() {
   	return n;
   }
   
-  DateTime now_dst = DateTime(n.year(), n.month(), n.day(), n.hour()+1, n.minute(), n.second());
+  DateTime now_dst = DateTime(n.unixtime() + 3600);
   return now_dst;
 }
 
@@ -39,7 +39,7 @@ void RTC_DS3231_DST::adjust(const DateTime &date) {
   DateTime date_dst = date;
 
   if (is_dst_period(date)) {
-    date_dst = DateTime(date.year(), date.month(), date.day(), date.hour()-1, date.minute(), date.second());
+    date_dst = DateTime(date_dst.unixtime() - 3600);
   }
 
   RTC_DS3231::adjust(date_dst);
